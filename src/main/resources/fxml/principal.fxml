@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="root-pane">
+    <left>
+        <VBox styleClass="sidebar" prefWidth="230" minWidth="230">
+            <VBox styleClass="sidebar-marca">
+                <Label text="LibroLink" styleClass="marca-titulo"/>
+                <Label text="Conectando personas con grandes historias." styleClass="marca-lema" wrapText="true"/>
+            </VBox>
+            <VBox fx:id="menu" spacing="4"/>
+        </VBox>
+    </left>
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="12">
+            <Label fx:id="tituloSeccion" styleClass="header-titulo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="usuarioLabel" styleClass="header-usuario"/>
+            <Button text="Cerrar sesión" styleClass="boton-secundario" onAction="#cerrarSesion"/>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="contenido" styleClass="contenido" alignment="TOP_LEFT"/>
+    </center>
+</BorderPane>

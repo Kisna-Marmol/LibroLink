@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="18">
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Resumen de la biblioteca" styleClass="subtitulo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Actualizar" styleClass="boton-secundario" onAction="#cargar"/>
+    </HBox>
+
+    <HBox spacing="14">
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <Label fx:id="valTitulos" text="–" styleClass="stat-valor"/>
+            <Label text="Títulos activos" styleClass="stat-etiqueta"/>
+        </VBox>
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <Label fx:id="valDisponibles" text="–" styleClass="stat-valor"/>
+            <Label text="Ejemplares disponibles" styleClass="stat-etiqueta"/>
+        </VBox>
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <Label fx:id="valActivos" text="–" styleClass="stat-valor"/>
+            <Label text="Préstamos activos" styleClass="stat-etiqueta"/>
+        </VBox>
+        <VBox fx:id="cardAtrasos" styleClass="stat-card" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <Label fx:id="valAtrasados" text="–" styleClass="stat-valor"/>
+            <Label text="Préstamos atrasados" styleClass="stat-etiqueta"/>
+        </VBox>
+    </HBox>
+
+    <Label text="Actividad reciente" styleClass="subtitulo"/>
+    <ListView fx:id="actividad" VBox.vgrow="ALWAYS"/>
+    <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+</VBox>

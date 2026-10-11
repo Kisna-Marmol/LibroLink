@@ -1,0 +1,190 @@
+.root-pane {
+    -fx-background-color: #F8F9F5;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-text-fill: #1F2937;
+}
+
+.label {
+    -fx-text-fill: #1F2937;
+}
+
+.status-ok {
+    -fx-text-fill: #2E7D32;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.status-warn {
+    -fx-text-fill: #F4B400;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 14, 0, 0, 3);
+}
+
+.titulo {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16423C;
+}
+
+.mensaje-error {
+    -fx-text-fill: #B3261E;
+    -fx-font-size: 13px;
+}
+
+.boton-primario {
+    -fx-background-color: #2E7D32;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 9 22;
+    -fx-cursor: hand;
+}
+
+.boton-primario:hover {
+    -fx-background-color: #16423C;
+}
+
+.text-field, .password-field {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #A7D7C5;
+    -fx-padding: 8 10;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2E7D32;
+}
+
+/* ---------- Layout principal ---------- */
+.sidebar {
+    -fx-background-color: #16423C;
+    -fx-padding: 0 0 16 0;
+}
+
+.sidebar-marca {
+    -fx-padding: 24 20 20 20;
+    -fx-spacing: 4;
+}
+
+.marca-titulo {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.marca-lema {
+    -fx-text-fill: #A7D7C5;
+    -fx-font-size: 11px;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 20;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.menu-item:hover {
+    -fx-background-color: rgba(167, 215, 197, 0.18);
+}
+
+.menu-item:selected {
+    -fx-background-color: #2E7D32;
+    -fx-font-weight: bold;
+}
+
+.header {
+    -fx-background-color: white;
+    -fx-padding: 14 24;
+    -fx-border-color: #A7D7C5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.header-titulo {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16423C;
+}
+
+.header-usuario {
+    -fx-text-fill: #1F2937;
+}
+
+.contenido {
+    -fx-padding: 24;
+}
+
+.subtitulo {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16423C;
+}
+
+.marcador {
+    -fx-text-fill: #1F2937;
+    -fx-font-size: 14px;
+}
+
+.boton-secundario {
+    -fx-background-color: transparent;
+    -fx-border-color: #2E7D32;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #2E7D32;
+    -fx-padding: 7 16;
+    -fx-cursor: hand;
+}
+
+.boton-secundario:hover {
+    -fx-background-color: #A7D7C5;
+}
+
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 18 20;
+    -fx-spacing: 4;
+    -fx-border-color: transparent transparent transparent #2E7D32;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 0, 2);
+}
+
+.stat-alerta {
+    -fx-border-color: transparent transparent transparent #F4B400;
+}
+
+.stat-valor {
+    -fx-font-family: "Poppins", "Segoe UI", sans-serif;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #16423C;
+}
+
+.stat-etiqueta {
+    -fx-text-fill: #1F2937;
+    -fx-font-size: 13px;
+}
+
+.list-view {
+    -fx-background-radius: 12;
+    -fx-border-color: #A7D7C5;
+    -fx-border-radius: 12;
+}

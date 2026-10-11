@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="root-pane">
+    <VBox alignment="TOP_CENTER" spacing="8" prefWidth="420" maxWidth="420" maxHeight="-Infinity" styleClass="card">
+        <ImageView fx:id="logo" fitHeight="110" preserveRatio="true"/>
+        <Label text="Crear administrador" styleClass="titulo"/>
+        <Label text="No hay administradores registrados. Crea la primera cuenta." wrapText="true" maxWidth="Infinity"/>
+        <Label text="Nombre" maxWidth="Infinity"/>
+        <TextField fx:id="nombre"/>
+        <Label text="Apellido" maxWidth="Infinity"/>
+        <TextField fx:id="apellido"/>
+        <Label text="Correo electrónico" maxWidth="Infinity"/>
+        <TextField fx:id="email"/>
+        <Label text="Contraseña (mínimo 10 caracteres, con letras y números)" maxWidth="Infinity" wrapText="true"/>
+        <PasswordField fx:id="password"/>
+        <Label text="Confirmar contraseña" maxWidth="Infinity"/>
+        <PasswordField fx:id="confirmacion" onAction="#crear"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true" maxWidth="Infinity"/>
+        <Button text="Crear administrador" defaultButton="true" maxWidth="Infinity" styleClass="boton-primario" onAction="#crear"/>
+    </VBox>
+</StackPane>
