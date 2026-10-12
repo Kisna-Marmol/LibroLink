@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+
+<TabPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" tabClosingPolicy="UNAVAILABLE">
+    <Tab fx:id="tabAutores" text="Autores"/>
+    <Tab fx:id="tabCategorias" text="Categorías"/>
+    <Tab fx:id="tabEditoriales" text="Editoriales"/>
+</TabPane>

@@ -3,8 +3,7 @@ package com.librolink;
 import com.librolink.config.AppConfig;
 import com.librolink.config.Database;
 import com.librolink.controller.Navegador;
-import com.librolink.service.AuthService;
-import com.librolink.service.DashboardService;
+import com.librolink.service.Servicios;
 import com.librolink.service.Sesion;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,10 +21,9 @@ public class Main extends Application {
             database = new Database(config);
 
             Sesion sesion = new Sesion();
-            AuthService auth = new AuthService(database);
-            DashboardService dashboard = new DashboardService(database, sesion);
+            Servicios servicios = Servicios.crear(database, sesion);
 
-            Navegador navegador = new Navegador(stage, auth, sesion, dashboard);
+            Navegador navegador = new Navegador(stage, servicios, sesion);
             navegador.mostrarInicial();
             stage.show();
         } catch (Exception e) {

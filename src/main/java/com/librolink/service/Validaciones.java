@@ -1,10 +1,13 @@
 package com.librolink.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
 
 public final class Validaciones {
 
@@ -59,6 +62,41 @@ public final class Validaciones {
         }
         if (!letra || !digito) {
             throw new ServicioException.Validacion("La contraseña debe incluir letras y números.");
+        }
+    }
+
+    /** Devuelve null si el valor está vacío. */
+    public static String textoOpcional(String valor, String campo, int maxLongitud) {
+        String v = valor == null ? "" : valor.trim();
+        if (v.isEmpty()) {
+            return null;
+        }
+        if (v.length() > maxLongitud) {
+            throw new ServicioException.Validacion(
+                    campo + " no puede superar " + maxLongitud + " caracteres.");
+        }
+        return v;
+    }
+
+    /** URL opcional: solo http o https con host. */
+    public static String urlOpcional(String valor, String campo) {
+        String v = textoOpcional(valor, campo, 255);
+        if (v == null) {
+            return null;
+        }
+        try {
+            URI uri = new URI(v);
+            String esquema = uri.getScheme();
+            boolean valida = esquema != null
+                    && (esquema.equalsIgnoreCase("http") || esquema.equalsIgnoreCase("https"))
+                    && uri.getHost() != null;
+            if (!valida) {
+                throw new URISyntaxException(v, "URL no válida");
+            }
+            return v;
+        } catch (URISyntaxException e) {
+            throw new ServicioException.Validacion(
+                    campo + " debe ser una URL que empiece con http:// o https://.");
         }
     }
 }

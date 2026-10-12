@@ -27,7 +27,7 @@ public final class DashboardService {
                     dao.ejemplaresDisponibles(cn),
                     dao.prestamosActivos(cn),
                     dao.prestamosAtrasados(cn),
-                    dao.actividadReciente(cn, 8));
+                    dao.actividadReciente(cn, 12));
         } catch (SQLException e) {
             throw new ServicioException.Datos("No se pudieron cargar las estadísticas.", e);
         }

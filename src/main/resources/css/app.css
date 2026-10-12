@@ -188,3 +188,33 @@
     -fx-border-color: #A7D7C5;
     -fx-border-radius: 12;
 }
+
+/* ---------- Gestores (tablas + formulario) ---------- */
+.gestor {
+    -fx-padding: 16 0 0 0;
+}
+
+.fila-inactiva {
+    -fx-opacity: 0.55;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #16423C;
+    -fx-size: 36;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #A7D7C5;
+    -fx-text-background-color: #1F2937;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #16423C;
+    -fx-font-weight: bold;
+}

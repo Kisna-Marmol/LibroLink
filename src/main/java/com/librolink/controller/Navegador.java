@@ -1,7 +1,6 @@
 package com.librolink.controller;
 
-import com.librolink.service.AuthService;
-import com.librolink.service.DashboardService;
+import com.librolink.service.Servicios;
 import com.librolink.service.Sesion;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,14 +19,12 @@ import java.util.Objects;
 public final class Navegador {
 
     private final Scene scene;
-    private final AuthService auth;
+    private final Servicios servicios;
     private final Sesion sesion;
-    private final DashboardService dashboard;
 
-    public Navegador(Stage stage, AuthService auth, Sesion sesion, DashboardService dashboard) {
-        this.auth = auth;
+    public Navegador(Stage stage, Servicios servicios, Sesion sesion) {
+        this.servicios = servicios;
         this.sesion = sesion;
-        this.dashboard = dashboard;
         this.scene = new Scene(new StackPane(), 1100, 700);
         scene.getStylesheets().add(
                 Objects.requireNonNull(Navegador.class.getResource("/css/app.css")).toExternalForm());
@@ -38,7 +35,7 @@ public final class Navegador {
     }
 
     public void mostrarInicial() {
-        if (auth.existeAdministrador()) {
+        if (servicios.auth().existeAdministrador()) {
             mostrarLogin();
         } else {
             mostrarSetupAdmin();
@@ -46,15 +43,18 @@ public final class Navegador {
     }
 
     public void mostrarLogin() {
-        scene.setRoot(cargarVista("/fxml/login.fxml", new LoginController(auth, sesion, this)));
+        scene.setRoot(cargarVista("/fxml/login.fxml",
+                new LoginController(servicios.auth(), sesion, this)));
     }
 
     public void mostrarSetupAdmin() {
-        scene.setRoot(cargarVista("/fxml/setup-admin.fxml", new SetupAdminController(auth, sesion, this)));
+        scene.setRoot(cargarVista("/fxml/setup-admin.fxml",
+                new SetupAdminController(servicios.auth(), sesion, this)));
     }
 
     public void mostrarPrincipal() {
-        scene.setRoot(cargarVista("/fxml/principal.fxml", new PrincipalController(sesion, this, dashboard)));
+        scene.setRoot(cargarVista("/fxml/principal.fxml",
+                new PrincipalController(sesion, this, servicios)));
     }
 
     static Parent cargarVista(String ruta, Object controlador) {

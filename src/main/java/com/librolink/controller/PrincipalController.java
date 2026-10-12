@@ -1,9 +1,10 @@
 package com.librolink.controller;
 
 import com.librolink.model.Usuario;
-import com.librolink.service.DashboardService;
+import com.librolink.service.Servicios;
 import com.librolink.service.Sesion;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -16,7 +17,7 @@ public final class PrincipalController {
 
     private final Sesion sesion;
     private final Navegador nav;
-    private final DashboardService dashboard;
+    private final Servicios servicios;
     private final ToggleGroup grupo = new ToggleGroup();
 
     @FXML private VBox menu;
@@ -24,10 +25,10 @@ public final class PrincipalController {
     @FXML private Label tituloSeccion;
     @FXML private Label usuarioLabel;
 
-    public PrincipalController(Sesion sesion, Navegador nav, DashboardService dashboard) {
+    public PrincipalController(Sesion sesion, Navegador nav, Servicios servicios) {
         this.sesion = sesion;
         this.nav = nav;
-        this.dashboard = dashboard;
+        this.servicios = servicios;
     }
 
     @FXML
@@ -64,7 +65,10 @@ public final class PrincipalController {
     private void mostrar(Seccion seccion) {
         tituloSeccion.setText(seccion.titulo());
         Node vista = switch (seccion) {
-            case PANEL -> Navegador.cargarVista("/fxml/panel.fxml", new PanelController(dashboard));
+            case PANEL -> Navegador.cargarVista("/fxml/panel.fxml",
+                    new PanelController(servicios.dashboard()));
+            case AUXILIARES -> Navegador.cargarVista("/fxml/auxiliares.fxml",
+                    new AuxiliaresController(servicios));
             default -> marcador(seccion);
         };
         contenido.getChildren().setAll(vista);
@@ -76,7 +80,7 @@ public final class PrincipalController {
         Label texto = new Label("Este módulo se construye en una próxima etapa.");
         texto.getStyleClass().add("marcador");
         VBox caja = new VBox(8, titulo, texto);
-        caja.setAlignment(javafx.geometry.Pos.TOP_LEFT);
+        caja.setAlignment(Pos.TOP_LEFT);
         return caja;
     }
 

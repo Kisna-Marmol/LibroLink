@@ -44,4 +44,24 @@ public final class Database implements AutoCloseable {
     public void close() {
         dataSource.close();
     }
+
+    @FunctionalInterface
+    public interface Trabajo<T> {
+        T ejecutar(Connection cn) throws SQLException;
+    }
+
+    /** Ejecuta el trabajo en una transacción: commit si termina bien, rollback ante cualquier error. */
+    public <T> T enTransaccion(Trabajo<T> trabajo) throws SQLException {
+        try (Connection cn = getConnection()) {
+            cn.setAutoCommit(false);
+            try {
+                T resultado = trabajo.ejecutar(cn);
+                cn.commit();
+                return resultado;
+            } catch (SQLException | RuntimeException e) {
+                cn.rollback();
+                throw e;
+            }
+        }
+    }
 }
