@@ -218,3 +218,28 @@
     -fx-text-fill: #16423C;
     -fx-font-weight: bold;
 }
+
+/* ---------- Catálogo de libros ---------- */
+.panel-scroll {
+    -fx-background-color: transparent;
+}
+
+.panel-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.combo-box-base {
+    -fx-background-radius: 8;
+    -fx-border-color: #A7D7C5;
+    -fx-border-radius: 8;
+}
+
+.text-area {
+    -fx-background-radius: 8;
+    -fx-border-color: #A7D7C5;
+    -fx-border-radius: 8;
+}
+
+.text-area .content {
+    -fx-background-radius: 8;
+}

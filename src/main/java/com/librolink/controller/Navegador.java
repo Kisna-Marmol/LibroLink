@@ -25,7 +25,7 @@ public final class Navegador {
     public Navegador(Stage stage, Servicios servicios, Sesion sesion) {
         this.servicios = servicios;
         this.sesion = sesion;
-        this.scene = new Scene(new StackPane(), 1100, 700);
+        this.scene = new Scene(new StackPane(), 1280, 720);
         scene.getStylesheets().add(
                 Objects.requireNonNull(Navegador.class.getResource("/css/app.css")).toExternalForm());
         stage.setTitle("LibroLink — Gestor de Biblioteca");

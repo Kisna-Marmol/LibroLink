@@ -45,6 +45,8 @@ public abstract class GestorAuxiliar<T> {
     /** Debe leer los campos y llamar a ejecutar(...) con crear o actualizar según 'seleccionado'. */
     protected abstract void guardarFormulario();
     protected abstract void cambiarEstado(T item, boolean activo);
+    /** Gancho opcional: se llama en el hilo de JavaFX cada vez que la tabla recibe resultados. */
+    protected void alCargar(List<T> lista) { }
 
     protected final void iniciar() {
         columnas();
@@ -95,6 +97,7 @@ public abstract class GestorAuxiliar<T> {
                 lista -> {
                     if (token == ultimaCarga) {
                         tabla.getItems().setAll(lista);
+                        alCargar(lista);
                     }
                 },
                 ex -> {

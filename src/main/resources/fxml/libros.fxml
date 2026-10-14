@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="16">
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="buscar" promptText="Buscar por título, ISBN, autor, categoría o editorial" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="filtroCategoria" prefWidth="180"/>
+            <CheckBox fx:id="incluirInactivos" text="Incluir inactivos"/>
+        </HBox>
+        <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        <Label fx:id="aviso" styleClass="marcador" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+    </VBox>
+
+    <ScrollPane fx:id="panelFormulario" fitToWidth="true" hbarPolicy="NEVER"
+                prefWidth="360" minWidth="360" maxWidth="360" styleClass="panel-scroll">
+        <VBox spacing="8" styleClass="card">
+            <Label fx:id="tituloFormulario" styleClass="subtitulo"/>
+
+            <Label text="ISBN (10 o 13 dígitos)"/>
+            <TextField fx:id="isbn"/>
+            <Label text="Título *"/>
+            <TextField fx:id="titulo"/>
+            <Label text="Subtítulo"/>
+            <TextField fx:id="subtitulo"/>
+            <Label text="Categoría *"/>
+            <ComboBox fx:id="comboCategoria" maxWidth="Infinity" promptText="Elegí una categoría"/>
+            <Label text="Editorial"/>
+            <ComboBox fx:id="comboEditorial" maxWidth="Infinity"/>
+
+            <HBox spacing="8">
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Año"/>
+                    <TextField fx:id="anio"/>
+                </VBox>
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Idioma"/>
+                    <TextField fx:id="idioma"/>
+                </VBox>
+            </HBox>
+
+            <Label text="Descripción"/>
+            <TextArea fx:id="descripcion" prefRowCount="3" wrapText="true"/>
+
+            <Label text="Autores"/>
+            <HBox spacing="8">
+                <ComboBox fx:id="autorCombo" maxWidth="Infinity" HBox.hgrow="ALWAYS" promptText="Elegí un autor"/>
+                <Button text="Agregar" styleClass="boton-secundario" onAction="#agregarAutor"/>
+            </HBox>
+            <ListView fx:id="autoresLista" prefHeight="90" minHeight="90" maxHeight="90"/>
+            <Button text="Quitar autor seleccionado" maxWidth="Infinity" styleClass="boton-secundario" onAction="#quitarAutor"/>
+
+            <Button fx:id="btnGuardar" text="Guardar" maxWidth="Infinity" styleClass="boton-primario"/>
+            <HBox spacing="8">
+                <Button fx:id="btnNuevo" text="Nuevo" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="boton-secundario"/>
+                <Button fx:id="btnEstado" text="Desactivar" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="boton-secundario"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</HBox>

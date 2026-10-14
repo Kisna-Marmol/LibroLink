@@ -99,4 +99,72 @@ public final class Validaciones {
                     campo + " debe ser una URL que empiece con http:// o https://.");
         }
     }
+
+    /**
+     * ISBN opcional. Acepta guiones y espacios; devuelve el valor normalizado (sin separadores, X en mayúscula)
+     * o null si está vacío. Valida ISBN-10 (dígito verificador módulo 11) e ISBN-13 (prefijo 978/979, módulo 10).
+     */
+    public static String isbnOpcional(String valor) {
+        if (valor == null) {
+            return null;
+        }
+        String v = valor.replaceAll("[\\s-]", "").toUpperCase(Locale.ROOT);
+        if (v.isEmpty()) {
+            return null;
+        }
+        boolean valido = v.length() == 10 ? isbn10Valido(v) : v.length() == 13 && isbn13Valido(v);
+        if (!valido) {
+            throw new ServicioException.Validacion(
+                    "El ISBN no es válido: debe ser ISBN-10 o ISBN-13 con dígito verificador correcto.");
+        }
+        return v;
+    }
+
+    private static boolean isbn10Valido(String v) {
+        int suma = 0;
+        for (int i = 0; i < 10; i++) {
+            char c = v.charAt(i);
+            int d;
+            if (c >= '0' && c <= '9') {
+                d = c - '0';
+            } else if (c == 'X' && i == 9) {
+                d = 10;
+            } else {
+                return false;
+            }
+            suma += d * (10 - i);
+        }
+        return suma % 11 == 0;
+    }
+
+    private static boolean isbn13Valido(String v) {
+        if (!v.startsWith("978") && !v.startsWith("979")) {
+            return false;
+        }
+        int suma = 0;
+        for (int i = 0; i < 13; i++) {
+            char c = v.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+            suma += (c - '0') * (i % 2 == 0 ? 1 : 3);
+        }
+        return suma % 10 == 0;
+    }
+
+    /** Año opcional entre 1 y anioMaximo. */
+    public static Integer anioOpcional(String valor, int anioMaximo) {
+        String v = valor == null ? "" : valor.trim();
+        if (v.isEmpty()) {
+            return null;
+        }
+        if (!v.matches("\\d{1,4}")) {
+            throw new ServicioException.Validacion("El año debe ser un número de hasta 4 dígitos.");
+        }
+        int anio = Integer.parseInt(v);
+        if (anio < 1 || anio > anioMaximo) {
+            throw new ServicioException.Validacion("El año debe estar entre 1 y " + anioMaximo + ".");
+        }
+        return anio;
+    }
 }
