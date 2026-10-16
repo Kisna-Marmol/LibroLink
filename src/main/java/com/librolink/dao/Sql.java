@@ -3,6 +3,8 @@ package com.librolink.dao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
+import java.sql.Date;
 
 final class Sql {
 
@@ -33,6 +35,14 @@ final class Sql {
             ps.setNull(indice, Types.INTEGER);
         } else {
             ps.setInt(indice, valor);
+        }
+    }
+
+    static void setDateNullable(PreparedStatement ps, int indice, LocalDate valor) throws SQLException {
+        if (valor == null) {
+            ps.setNull(indice, Types.DATE);
+        } else {
+            ps.setDate(indice, Date.valueOf(valor));
         }
     }
 }

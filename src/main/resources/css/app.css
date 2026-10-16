@@ -243,3 +243,9 @@
 .text-area .content {
     -fx-background-radius: 8;
 }
+
+/* ---------- Inventario ---------- */
+.libro-elegido {
+    -fx-font-weight: bold;
+    -fx-text-fill: #16423C;
+}

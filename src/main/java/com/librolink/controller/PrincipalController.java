@@ -71,6 +71,8 @@ public final class PrincipalController {
                     new AuxiliaresController(servicios));
             case CATALOGO -> Navegador.cargarVista("/fxml/libros.fxml",
                     new LibrosController(servicios.libros()));
+            case INVENTARIO -> Navegador.cargarVista("/fxml/ejemplares.fxml",
+                    new EjemplaresController(servicios.ejemplares(), servicios.libros()));
             default -> marcador(seccion);
         };
         contenido.getChildren().setAll(vista);

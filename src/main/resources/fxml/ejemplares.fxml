@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="16">
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="buscar" promptText="Buscar por código, título, ISBN o ubicación" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="filtroEstado" prefWidth="180"/>
+        </HBox>
+        <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        <Label fx:id="aviso" styleClass="marcador" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                prefWidth="360" minWidth="360" maxWidth="360" styleClass="panel-scroll">
+        <VBox spacing="8" styleClass="card">
+            <Label fx:id="tituloFormulario" styleClass="subtitulo"/>
+
+            <Label text="Libro *"/>
+            <Label fx:id="libroElegido" styleClass="libro-elegido" wrapText="true"/>
+            <TextField fx:id="buscarLibro" promptText="Buscar libro por título, ISBN o autor"/>
+            <ListView fx:id="listaLibros" prefHeight="110" minHeight="110" maxHeight="110"/>
+
+            <Label text="Código de inventario *"/>
+            <HBox spacing="8">
+                <TextField fx:id="codigo" HBox.hgrow="ALWAYS"/>
+                <Button text="Sugerir" styleClass="boton-secundario" onAction="#sugerirCodigo"/>
+            </HBox>
+
+            <Label text="Ubicación"/>
+            <TextField fx:id="ubicacion" promptText="Ej.: Estante A-3"/>
+
+            <HBox spacing="8">
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Adquisición"/>
+                    <DatePicker fx:id="fechaAdquisicion" maxWidth="Infinity"/>
+                </VBox>
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Estado *"/>
+                    <ComboBox fx:id="comboEstado" maxWidth="Infinity"/>
+                </VBox>
+            </HBox>
+
+            <Label text="Observaciones"/>
+            <TextArea fx:id="observaciones" prefRowCount="3" wrapText="true"/>
+
+            <Button text="Guardar" maxWidth="Infinity" styleClass="boton-primario" onAction="#guardar"/>
+            <Button text="Nuevo" maxWidth="Infinity" styleClass="boton-secundario" onAction="#nuevo"/>
+        </VBox>
+    </ScrollPane>
+</HBox>

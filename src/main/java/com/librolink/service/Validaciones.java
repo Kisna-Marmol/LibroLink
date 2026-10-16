@@ -18,6 +18,8 @@ public final class Validaciones {
     private static final Pattern EMAIL =
             Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.[A-Za-z]{2,}$");
 
+    private static final Pattern CODIGO_INVENTARIO = Pattern.compile("^[A-Za-z0-9][A-Za-z0-9._/-]{0,49}$");
+
     private Validaciones() { }
 
     /** Devuelve el email recortado y en minúsculas. */
@@ -166,5 +168,18 @@ public final class Validaciones {
             throw new ServicioException.Validacion("El año debe estar entre 1 y " + anioMaximo + ".");
         }
         return anio;
+    }
+
+    /** Código de inventario: recortado, validado y en mayúsculas (la BD no distingue mayúsculas al comparar). */
+    public static String codigoInventario(String valor) {
+        String v = valor == null ? "" : valor.trim();
+        if (v.isEmpty()) {
+            throw new ServicioException.Validacion("El código de inventario es obligatorio.");
+        }
+        if (!CODIGO_INVENTARIO.matcher(v).matches()) {
+            throw new ServicioException.Validacion(
+                    "El código solo puede tener letras sin tilde, números y los símbolos . _ / - (máximo 50 caracteres).");
+        }
+        return v.toUpperCase(Locale.ROOT);
     }
 }
