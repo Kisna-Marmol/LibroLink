@@ -17,6 +17,7 @@
             <Label fx:id="tituloSeccion" styleClass="header-titulo"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="usuarioLabel" styleClass="header-usuario"/>
+            <Button text="Cambiar contraseña" styleClass="boton-secundario" onAction="#cambiarPassword"/>
             <Button text="Cerrar sesión" styleClass="boton-secundario" onAction="#cerrarSesion"/>
         </HBox>
     </top>

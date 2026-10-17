@@ -249,3 +249,13 @@
     -fx-font-weight: bold;
     -fx-text-fill: #16423C;
 }
+
+/* ---------- Usuarios e historial ---------- */
+.mensaje-ok {
+    -fx-text-fill: #2E7D32;
+    -fx-font-size: 13px;
+}
+
+.fila-alerta {
+    -fx-background-color: rgba(244, 180, 0, 0.20);
+}

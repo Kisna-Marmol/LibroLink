@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="16">
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="buscar" promptText="Buscar por nombre, correo, socio o teléfono" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="filtroRol" prefWidth="150"/>
+            <ComboBox fx:id="filtroEstado" prefWidth="160"/>
+        </HBox>
+        <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        <VBox fx:id="panelHistorial" spacing="6">
+            <Label text="Historial de préstamos del lector seleccionado" styleClass="subtitulo"/>
+            <TableView fx:id="tablaHistorial" prefHeight="190" minHeight="190" maxHeight="190"/>
+        </VBox>
+        <Label fx:id="aviso" styleClass="mensaje-ok" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                prefWidth="360" minWidth="360" maxWidth="360" styleClass="panel-scroll">
+        <VBox spacing="8" styleClass="card">
+            <Label fx:id="tituloFormulario" styleClass="subtitulo"/>
+
+            <Label text="Rol *"/>
+            <ComboBox fx:id="comboRol" maxWidth="Infinity"/>
+
+            <Label text="Número de socio *"/>
+            <HBox spacing="8">
+                <TextField fx:id="numeroSocio" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnSugerir" text="Sugerir" styleClass="boton-secundario" onAction="#sugerirSocio"/>
+            </HBox>
+
+            <Label text="Nombre *"/>
+            <TextField fx:id="nombre"/>
+            <Label text="Apellido *"/>
+            <TextField fx:id="apellido"/>
+            <Label text="Correo electrónico *"/>
+            <TextField fx:id="email"/>
+            <Label text="Teléfono"/>
+            <TextField fx:id="telefono"/>
+            <Label text="Estado *"/>
+            <ComboBox fx:id="comboEstado" maxWidth="Infinity"/>
+
+            <Label text="Contraseña (obligatoria al crear; también para restablecer). Anótala antes de guardar: no se puede consultar después."
+                   wrapText="true" maxWidth="Infinity"/>
+            <HBox spacing="8">
+                <TextField fx:id="password" HBox.hgrow="ALWAYS"/>
+                <Button text="Generar" styleClass="boton-secundario" onAction="#generarPassword"/>
+            </HBox>
+
+            <Button text="Guardar" maxWidth="Infinity" styleClass="boton-primario" onAction="#guardar"/>
+            <Button fx:id="btnReset" text="Restablecer contraseña" maxWidth="Infinity"
+                    styleClass="boton-secundario" onAction="#restablecer"/>
+            <Button text="Nuevo" maxWidth="Infinity" styleClass="boton-secundario" onAction="#nuevo"/>
+        </VBox>
+    </ScrollPane>
+</HBox>

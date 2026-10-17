@@ -20,6 +20,10 @@ public final class Validaciones {
 
     private static final Pattern CODIGO_INVENTARIO = Pattern.compile("^[A-Za-z0-9][A-Za-z0-9._/-]{0,49}$");
 
+    private static final Pattern TELEFONO = Pattern.compile("^[0-9+()\\s-]{7,30}$");
+
+    private static final Pattern NUMERO_SOCIO = Pattern.compile("^[A-Za-z0-9][A-Za-z0-9-]{0,29}$");
+
     private Validaciones() { }
 
     /** Devuelve el email recortado y en minúsculas. */
@@ -179,6 +183,32 @@ public final class Validaciones {
         if (!CODIGO_INVENTARIO.matcher(v).matches()) {
             throw new ServicioException.Validacion(
                     "El código solo puede tener letras sin tilde, números y los símbolos . _ / - (máximo 50 caracteres).");
+        }
+        return v.toUpperCase(Locale.ROOT);
+    }
+
+    /** Teléfono opcional: solo números, espacios y + ( ) -. */
+    public static String telefonoOpcional(String valor) {
+        String v = textoOpcional(valor, "El teléfono", 30);
+        if (v == null) {
+            return null;
+        }
+        if (!TELEFONO.matcher(v).matches()) {
+            throw new ServicioException.Validacion(
+                    "El teléfono solo puede tener números, espacios y los símbolos + ( ) - (mínimo 7 caracteres).");
+        }
+        return v;
+    }
+
+    /** Número de socio obligatorio: recortado, validado y en mayúsculas. */
+    public static String numeroSocio(String valor) {
+        String v = valor == null ? "" : valor.trim();
+        if (v.isEmpty()) {
+            throw new ServicioException.Validacion("El número de socio es obligatorio para los lectores.");
+        }
+        if (!NUMERO_SOCIO.matcher(v).matches()) {
+            throw new ServicioException.Validacion(
+                    "El número de socio solo puede tener letras sin tilde, números y guiones (máximo 30 caracteres).");
         }
         return v.toUpperCase(Locale.ROOT);
     }
