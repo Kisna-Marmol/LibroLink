@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="12">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Reporte" styleClass="subtitulo"/>
+        <ComboBox fx:id="comboReporte" prefWidth="300"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Generar" styleClass="boton-primario" onAction="#generar"/>
+        <Button fx:id="btnExportar" text="Exportar a CSV" styleClass="boton-secundario" onAction="#exportar"/>
+    </HBox>
+
+    <HBox fx:id="paramsFechas" spacing="10" alignment="CENTER_LEFT">
+        <Label text="Desde"/>
+        <DatePicker fx:id="desde" prefWidth="150"/>
+        <Label text="Hasta"/>
+        <DatePicker fx:id="hasta" prefWidth="150"/>
+        <Label fx:id="notaFechas" styleClass="marcador" wrapText="true"/>
+    </HBox>
+
+    <HBox fx:id="paramTop" spacing="10" alignment="CENTER_LEFT">
+        <Label text="Mostrar los"/>
+        <ComboBox fx:id="comboTop" prefWidth="90"/>
+        <Label text="libros más prestados"/>
+    </HBox>
+
+    <HBox fx:id="paramEstado" spacing="10" alignment="CENTER_LEFT">
+        <Label text="Estado del ejemplar"/>
+        <ComboBox fx:id="comboEstadoInv" prefWidth="200"/>
+    </HBox>
+
+    <VBox fx:id="panelLector" spacing="6">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Lector:"/>
+            <Label fx:id="lectorElegidoLabel" text="Ningún lector seleccionado" styleClass="libro-elegido"/>
+        </HBox>
+        <TextField fx:id="buscarLector" promptText="Buscar lector por nombre, socio o correo"/>
+        <ListView fx:id="listaLectores" prefHeight="90" minHeight="90" maxHeight="90"/>
+    </VBox>
+
+    <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+    <Label fx:id="resumen" styleClass="marcador" wrapText="true"/>
+    <Label fx:id="aviso" styleClass="mensaje-ok" wrapText="true"/>
+    <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+</VBox>

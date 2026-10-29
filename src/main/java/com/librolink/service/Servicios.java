@@ -7,7 +7,8 @@ public record Servicios(AuthService auth, DashboardService dashboard,
                         AutorService autores, CategoriaService categorias,
                         EditorialService editoriales, LibroService libros,
                         EjemplarService ejemplares, UsuarioService usuarios,
-                        HistorialService historial, PrestamoService prestamos) {
+                        HistorialService historial, PrestamoService prestamos,
+                        ReporteService reportes) {
 
     public static Servicios crear(Database db, Sesion sesion) {
         return new Servicios(
@@ -20,6 +21,7 @@ public record Servicios(AuthService auth, DashboardService dashboard,
                 new EjemplarService(db, sesion),
                 new UsuarioService(db, sesion),
                 new HistorialService(db, sesion),
-                new PrestamoService(db, sesion));
+                new PrestamoService(db, sesion),
+                new ReporteService(db, sesion));
     }
 }

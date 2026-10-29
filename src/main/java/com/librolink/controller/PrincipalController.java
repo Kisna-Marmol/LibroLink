@@ -92,6 +92,8 @@ public final class PrincipalController {
                     new MiHistorialController(servicios.historial()));
             case PRESTAMOS -> Navegador.cargarVista("/fxml/prestamos.fxml",
                     new PrestamosController(servicios.prestamos(), servicios.usuarios()));
+            case REPORTES -> Navegador.cargarVista("/fxml/reportes.fxml",
+                    new ReportesController(servicios.reportes(), servicios.usuarios()));
             default -> marcador(seccion);
         };
         contenido.getChildren().setAll(vista);
