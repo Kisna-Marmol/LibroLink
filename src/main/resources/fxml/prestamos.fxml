@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="16">
+    <VBox spacing="10" HBox.hgrow="ALWAYS">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <TextField fx:id="buscar" promptText="Buscar por lector, socio, correo, código de ejemplar o Nº" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="filtroEstado" prefWidth="180"/>
+        </HBox>
+        <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+        <Label text="Ejemplares del préstamo seleccionado" styleClass="subtitulo"/>
+        <TableView fx:id="tablaDetalle" prefHeight="150" minHeight="150" maxHeight="150"/>
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="obsDevolucion" promptText="Observaciones (opcional)" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnDevolver" text="Devolver" styleClass="boton-primario" onAction="#devolver"/>
+            <Button fx:id="btnPerdido" text="Marcar perdido" styleClass="boton-secundario" onAction="#marcarPerdido"/>
+            <Button fx:id="btnCancelar" text="Cancelar préstamo" styleClass="boton-secundario" onAction="#cancelar"/>
+        </HBox>
+        <Label fx:id="aviso" styleClass="mensaje-ok" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER"
+                prefWidth="360" minWidth="360" maxWidth="360" styleClass="panel-scroll">
+        <VBox spacing="8" styleClass="card">
+            <Label text="Nuevo préstamo" styleClass="subtitulo"/>
+
+            <Label text="Lector *"/>
+            <Label fx:id="lectorElegidoLabel" text="Ningún lector seleccionado" styleClass="libro-elegido" wrapText="true"/>
+            <TextField fx:id="buscarLector" promptText="Buscar lector por nombre, socio o correo"/>
+            <ListView fx:id="listaLectores" prefHeight="100" minHeight="100" maxHeight="100"/>
+            <Label fx:id="situacionLabel" wrapText="true" maxWidth="Infinity"/>
+
+            <Label text="Ejemplares *"/>
+            <HBox spacing="8">
+                <TextField fx:id="codigoEjemplar" promptText="Código de inventario" HBox.hgrow="ALWAYS"
+                           onAction="#agregarEjemplar"/>
+                <Button text="Agregar" styleClass="boton-secundario" onAction="#agregarEjemplar"/>
+            </HBox>
+            <ListView fx:id="listaEjemplares" prefHeight="110" minHeight="110" maxHeight="110"/>
+            <Button text="Quitar ejemplar seleccionado" maxWidth="Infinity" styleClass="boton-secundario"
+                    onAction="#quitarEjemplar"/>
+            <Label fx:id="venceLabel" styleClass="marcador" wrapText="true"/>
+
+            <Label text="Observaciones"/>
+            <TextArea fx:id="observaciones" prefRowCount="2" wrapText="true"/>
+
+            <Button text="Registrar préstamo" maxWidth="Infinity" styleClass="boton-primario" onAction="#registrar"/>
+            <Button text="Limpiar" maxWidth="Infinity" styleClass="boton-secundario" onAction="#limpiar"/>
+        </VBox>
+    </ScrollPane>
+</HBox>
