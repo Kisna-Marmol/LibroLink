@@ -21,7 +21,7 @@ public class Main extends Application {
             database = new Database(config);
 
             Sesion sesion = new Sesion();
-            Servicios servicios = Servicios.crear(database, sesion);
+            Servicios servicios = Servicios.crear(database, sesion, config);
 
             Navegador navegador = new Navegador(stage, servicios, sesion);
             navegador.mostrarInicial();

@@ -212,4 +212,17 @@ public final class Validaciones {
         }
         return v.toUpperCase(Locale.ROOT);
     }
+
+    /** Entero obligatorio dentro de [minimo, maximo]. Rechaza vacíos, signos, decimales y texto. */
+    public static int enteroEnRango(String valor, String campo, int minimo, int maximo) {
+        String v = valor == null ? "" : valor.trim();
+        if (!v.matches("\\d{1,9}")) {
+            throw new ServicioException.Validacion(campo + " debe ser un número entero.");
+        }
+        int n = Integer.parseInt(v);
+        if (n < minimo || n > maximo) {
+            throw new ServicioException.Validacion(campo + " debe estar entre " + minimo + " y " + maximo + ".");
+        }
+        return n;
+    }
 }

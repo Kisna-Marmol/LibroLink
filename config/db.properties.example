@@ -1,0 +1,9 @@
+# Copia este archivo como config/db.properties y completa tus valores locales.
+# db.properties esta en .gitignore: nunca lo subas al repositorio.
+db.url=jdbc:mysql://localhost:3306/bibliolink_db?serverTimezone=America/Tegucigalpa&characterEncoding=UTF-8
+db.user=CAMBIAR_USUARIO
+db.password=CAMBIAR_PASSWORD
+
+# Opcional: ruta de mysqldump o mariadb-dump para el respaldo (usa barras normales /).
+# Si falta, la aplicacion lo busca en el PATH y en las carpetas habituales (XAMPP, MySQL).
+# backup.dump=C:/xampp/mysql/bin/mysqldump.execlear

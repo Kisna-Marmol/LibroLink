@@ -94,6 +94,8 @@ public final class PrincipalController {
                     new PrestamosController(servicios.prestamos(), servicios.usuarios()));
             case REPORTES -> Navegador.cargarVista("/fxml/reportes.fxml",
                     new ReportesController(servicios.reportes(), servicios.usuarios()));
+            case CONFIGURACION -> Navegador.cargarVista("/fxml/configuracion.fxml",
+                    new ConfiguracionController(servicios));
             default -> marcador(seccion);
         };
         contenido.getChildren().setAll(vista);

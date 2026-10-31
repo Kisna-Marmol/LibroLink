@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="10" styleClass="gestor">
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Desde"/>
+        <DatePicker fx:id="desde" prefWidth="135"/>
+        <Label text="Hasta"/>
+        <DatePicker fx:id="hasta" prefWidth="135"/>
+        <TextField fx:id="usuario" promptText="Usuario (nombre o correo)" prefWidth="200" onAction="#buscar"/>
+        <ComboBox fx:id="comboAccion" prefWidth="200"/>
+        <ComboBox fx:id="comboEntidad" prefWidth="160"/>
+        <Button text="Buscar" styleClass="boton-primario" onAction="#buscar"/>
+    </HBox>
+    <TableView fx:id="tabla" VBox.vgrow="ALWAYS"/>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="btnAnterior" text="Anterior" styleClass="boton-secundario" onAction="#anterior"/>
+        <Label fx:id="paginaLabel"/>
+        <Button fx:id="btnSiguiente" text="Siguiente" styleClass="boton-secundario" onAction="#siguiente"/>
+    </HBox>
+    <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+</VBox>

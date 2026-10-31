@@ -1,5 +1,6 @@
 package com.librolink.service;
 
+import com.librolink.config.AppConfig;
 import com.librolink.config.Database;
 
 /** Contenedor de servicios de la aplicación. Cada etapa agrega los suyos aquí. */
@@ -8,9 +9,10 @@ public record Servicios(AuthService auth, DashboardService dashboard,
                         EditorialService editoriales, LibroService libros,
                         EjemplarService ejemplares, UsuarioService usuarios,
                         HistorialService historial, PrestamoService prestamos,
-                        ReporteService reportes) {
+                        ReporteService reportes, ConfiguracionService configuracion,
+                        AuditoriaService auditoria, RespaldoService respaldo) {
 
-    public static Servicios crear(Database db, Sesion sesion) {
+    public static Servicios crear(Database db, Sesion sesion, AppConfig config) {
         return new Servicios(
                 new AuthService(db),
                 new DashboardService(db, sesion),
@@ -22,6 +24,9 @@ public record Servicios(AuthService auth, DashboardService dashboard,
                 new UsuarioService(db, sesion),
                 new HistorialService(db, sesion),
                 new PrestamoService(db, sesion),
-                new ReporteService(db, sesion));
+                new ReporteService(db, sesion),
+                new ConfiguracionService(db, sesion),
+                new AuditoriaService(db, sesion),
+                new RespaldoService(db, sesion, config));
     }
 }

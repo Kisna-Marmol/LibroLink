@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="14" styleClass="gestor">
+    <VBox spacing="8" styleClass="card" prefWidth="640" maxWidth="640" maxHeight="-Infinity">
+        <Label text="Respaldo de la base de datos" styleClass="subtitulo"/>
+        <Label text="Genera un archivo .sql con toda la base (estructura y datos) usando mysqldump o mariadb-dump."
+               wrapText="true"/>
+        <Label fx:id="herramienta" styleClass="marcador" wrapText="true"/>
+        <Button fx:id="btnRespaldar" text="Crear respaldo ahora…" styleClass="boton-primario" onAction="#respaldar"/>
+        <Label fx:id="aviso" styleClass="mensaje-ok" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+
+        <Label text="Para restaurar: crea una base vacía y, en una consola, ejecuta  mysql -u USUARIO -p NOMBRE_BASE &lt; archivo.sql"
+               styleClass="marcador" wrapText="true"/>
+        <Label text="El archivo contiene datos personales de los lectores y los hashes de contraseñas: guárdalo fuera de esta computadora, en un lugar privado."
+               styleClass="marcador" wrapText="true"/>
+    </VBox>
+</VBox>

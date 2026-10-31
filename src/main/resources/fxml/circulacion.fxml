@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" spacing="14" styleClass="gestor">
+    <VBox spacing="8" styleClass="card" prefWidth="520" maxWidth="520" maxHeight="-Infinity">
+        <Label text="Parámetros de circulación" styleClass="subtitulo"/>
+
+        <Label text="Días de préstamo (1 a 365)"/>
+        <TextField fx:id="diasPrestamo"/>
+        <Label text="Máximo de ejemplares por préstamo (1 a 20)"/>
+        <TextField fx:id="maxEjemplares"/>
+        <Label text="Máximo de préstamos activos por lector (1 a 50)"/>
+        <TextField fx:id="maxActivos"/>
+        <CheckBox fx:id="permitirAtrasos" text="Permitir préstamos a lectores con atrasos"/>
+        <Label text="Días de anticipación para marcar «Por vencer» (0 a 30)"/>
+        <TextField fx:id="diasAviso"/>
+
+        <Label text="Los cambios se aplican a los préstamos nuevos; los ya registrados conservan su vencimiento."
+               styleClass="marcador" wrapText="true"/>
+        <Label fx:id="aviso" styleClass="mensaje-ok" wrapText="true"/>
+        <Label fx:id="error" styleClass="mensaje-error" wrapText="true"/>
+
+        <HBox spacing="8">
+            <Button text="Guardar" styleClass="boton-primario" onAction="#guardar"/>
+            <Button text="Restaurar valores iniciales" styleClass="boton-secundario" onAction="#restaurar"/>
+            <Button text="Recargar" styleClass="boton-secundario" onAction="#cargar"/>
+        </HBox>
+    </VBox>
+</VBox>
