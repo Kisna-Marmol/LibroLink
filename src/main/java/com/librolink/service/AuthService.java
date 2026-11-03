@@ -16,7 +16,12 @@ import java.util.Optional;
 
 public final class AuthService {
 
+    static final int MAX_INTENTOS_FALLIDOS = 5;
+    static final int MINUTOS_BLOQUEO = 15;
+
     private static final String ERROR_CREDENCIALES = "Correo o contraseña incorrectos.";
+    private static final String ERROR_BLOQUEO =
+            "Demasiados intentos fallidos. Intenta de nuevo en " + MINUTOS_BLOQUEO + " minutos.";
 
     private final Database db;
     private final UsuarioDao usuarios = new UsuarioDao();
@@ -72,6 +77,11 @@ public final class AuthService {
         }
     }
 
+    /**
+     * Mensaje genérico ante cualquier fallo. Tras MAX_INTENTOS_FALLIDOS fallos de una cuenta en
+     * MINUTOS_BLOQUEO minutos se rechazan los intentos de esa cuenta (aunque la clave sea correcta)
+     * hasta que pase la ventana. Los intentos bloqueados no amplían el bloqueo.
+     */
     public Usuario iniciarSesion(String email, char[] password) {
         String correo;
         try {
@@ -83,11 +93,18 @@ public final class AuthService {
 
         try (Connection cn = db.getConnection()) {
             Optional<Credencial> cred = usuarios.buscarPorEmail(cn, correo);
-            boolean claveOk = hasher.verificar(password,
-                    cred.map(Credencial::passwordHash).orElse(hashFicticio));
             Long idUsuario = cred.map(c -> c.usuario().id()).orElse(null);
             String idRegistro = idUsuario == null ? null : idUsuario.toString();
 
+            if (idUsuario != null && auditoria.contarLoginsFallidosRecientes(
+                    cn, idUsuario, MINUTOS_BLOQUEO) >= MAX_INTENTOS_FALLIDOS) {
+                hasher.verificar(password, hashFicticio); // mismo costo que un intento normal
+                auditoria.registrar(cn, idUsuario, "LOGIN_BLOQUEADO", "usuarios", idRegistro, null);
+                throw new ServicioException.Autenticacion(ERROR_BLOQUEO);
+            }
+
+            boolean claveOk = hasher.verificar(password,
+                    cred.map(Credencial::passwordHash).orElse(hashFicticio));
             if (cred.isEmpty() || !claveOk || cred.get().usuario().estado() != EstadoUsuario.ACTIVO) {
                 auditoria.registrar(cn, idUsuario, "LOGIN_FALLIDO", "usuarios", idRegistro, null);
                 throw new ServicioException.Autenticacion(ERROR_CREDENCIALES);

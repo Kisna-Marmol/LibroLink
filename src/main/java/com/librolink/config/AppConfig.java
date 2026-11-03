@@ -8,7 +8,10 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /** Configuración local de la aplicación (conexión a la base de datos). Sin valores por defecto sensibles. */
 public final class AppConfig {
@@ -28,17 +31,43 @@ public final class AppConfig {
         this.backupDump = backupDump;
     }
 
+    /**
+     * Si LIBROLINK_CONFIG está definida, se usa exclusivamente ese archivo. Si no, se busca en
+     * config/db.properties (carpeta de trabajo), luego en %APPDATA%\LibroLink y por último en ~/.librolink.
+     */
     public static AppConfig load() throws IOException {
         String env = System.getenv(ENV_CONFIG_PATH);
-        Path path = (env != null && !env.isBlank()) ? Path.of(env) : DEFAULT_PATH;
-        return cargarDesde(path);
+        if (env != null && !env.isBlank()) {
+            return cargarDesde(Path.of(env.trim()));
+        }
+        List<Path> candidatas = ubicaciones(System.getenv("APPDATA"), System.getProperty("user.home"));
+        for (Path p : candidatas) {
+            if (Files.isRegularFile(p)) {
+                return cargarDesde(p);
+            }
+        }
+        throw new IOException("No se encontró el archivo de configuración. Se buscó en:\n"
+                + candidatas.stream().map(p -> " - " + p.toAbsolutePath()).collect(Collectors.joining("\n"))
+                + "\nCopiá config/db.properties.example a alguna de esas ubicaciones y completá tus datos.");
+    }
+
+    /** Ubicaciones donde se busca el archivo, en orden de prioridad. */
+    static List<Path> ubicaciones(String appData, String userHome) {
+        List<Path> lista = new ArrayList<>();
+        lista.add(DEFAULT_PATH);
+        if (appData != null && !appData.isBlank()) {
+            lista.add(Path.of(appData.trim(), "LibroLink", "db.properties"));
+        }
+        if (userHome != null && !userHome.isBlank()) {
+            lista.add(Path.of(userHome.trim(), ".librolink", "db.properties"));
+        }
+        return lista;
     }
 
     static AppConfig cargarDesde(Path path) throws IOException {
         if (!Files.isRegularFile(path)) {
-            throw new IOException("No se encontró el archivo de configuración: "
-                    + path.toAbsolutePath()
-                    + ". Copiá config/db.properties.example a config/db.properties.");
+            throw new IOException("No se encontró el archivo de configuración: " + path.toAbsolutePath()
+                    + ". Copiá config/db.properties.example a esa ubicación.");
         }
         String text = decodificar(Files.readAllBytes(path));
         if (!text.isEmpty() && text.charAt(0) == '\uFEFF') {

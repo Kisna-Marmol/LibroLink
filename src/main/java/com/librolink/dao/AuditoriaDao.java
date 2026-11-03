@@ -120,4 +120,25 @@ public final class AuditoriaDao {
         }
         return lista;
     }
+
+    /** Intentos fallidos de ingreso de un usuario en los últimos minutos, contados desde su último ingreso correcto. */
+    public long contarLoginsFallidosRecientes(Connection cn, long idUsuario, int minutos) throws SQLException {
+        String sql = """
+            SELECT COUNT(*) FROM auditoria a
+            WHERE a.id_usuario = ? AND a.accion = 'LOGIN_FALLIDO'
+              AND a.fecha >= DATE_SUB(NOW(), INTERVAL ? MINUTE)
+              AND a.id_auditoria > COALESCE(
+                    (SELECT MAX(l.id_auditoria) FROM auditoria l
+                     WHERE l.id_usuario = ? AND l.accion = 'LOGIN'), 0)
+            """;
+        try (PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setLong(1, idUsuario);
+            ps.setInt(2, minutos);
+            ps.setLong(3, idUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                return rs.getLong(1);
+            }
+        }
+    }
 }
